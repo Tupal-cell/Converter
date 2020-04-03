@@ -1,26 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+
+function Situation(props){
+  if(props.money >= 50000){
+  return <p>Votre revenu est modeste</p>;
+}
+return <p>votre revenu est faible</p>
 }
 
-export default App;
+class Simulateur extends Component{
+  constructor(props){
+    super(props);
+    this.handleChange = this.handleChange.bind(this);
+    this.state = {money: ""};
+  }
+  handleChange(e){
+    this.setState({money: e.target.value});
+  }
+  render(){
+    const money = this.state.money;
+    return (
+    <div>
+      <fieldset>
+        <legend>Simulateur de situation financiere</legend>
+        <input value={money} onChange= {this.handleChange}/>
+      </fieldset>
+      <Situation money={money}/>
+    </div>
+    );
+  }
+}
+
+export default Simulateur ;
